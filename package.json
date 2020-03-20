@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/synzen/Discord.RSS-Clone#readme",
   "dependencies": {
-    "discord.rss": "github:synzen/discord.rss#dev",
+    "discord.rss": "^5.0.3",
     "request": "^2.88.2"
   },
   "devDependencies": {
