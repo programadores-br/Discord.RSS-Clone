@@ -1,5 +1,6 @@
 # MonitoRSS Clone (Formerly Discord.RSS)
 
+
 **This repository is only for users who will clone MonitoRSS (formerly known as Discord.RSS) files directly.**
 
 The main repository is located at https://github.com/synzen/MonitoRSS, and the web repository at https://github.com/synzen/MonitoRSS-Web.
@@ -10,6 +11,7 @@ Driven by the lack of comprehensive RSS bots available, I have decided to try my
 
 All documentation can be found at https://docs.monitorss.xyz/.
 
+
 ### Publicly Hosted Instance
 
 Don't want to bother hosting your own instance? Use the publicly hosted one!
@@ -18,6 +20,7 @@ https://discordapp.com/oauth2/authorize?client_id=268478587651358721&scope=bot&p
 
 
 ### Web Interface
+
 
 MonitoRSS also comes with a web interface! To run the web interface, see the documentation.
 
@@ -52,6 +55,7 @@ git remote add origin https://github.com/synzen/MonitoRSS-Clone.git && npm insta
 4. Use a tool like [Uptime Robot](https://uptimerobot.com/) to prevent the bot from going offline.
 
 If you want the web interface, you will need to follow the [web configuration](https://docs.monitorss.xyz/configuration/web-interface) and add the following in a file named .env:
+
 
 ![image](https://user-images.githubusercontent.com/44692189/82736173-5b68f500-9d49-11ea-9e42-9b23af184438.png)
 
