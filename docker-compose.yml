@@ -1,30 +1,53 @@
 version: "3.5"
 services:
-  drss-mongo:
-    container_name: drss-mongodb-container
+  mrss-redis:
+    container_name: mrss-redis-container
+    restart: on-failure:5
+    image: redis:alpine
+    # Comment below to show redis logs
+    # logging:
+    #   driver: none
+  mrss-mongo:
+    container_name: mrss-mongodb-container
     restart: on-failure:5
     command: mongod --port 27017
-    # Uncomment below to hide mongo logs
+    # Comment below to show mongo logs
     # logging:
     #   driver: none
     image: mongo:latest
     volumes:
       - 'db-data:/data/db'
-    networks:
-      - drss-network
-  drss-bot:
-    container_name: drss-bot-container
-    restart: on-failure:10
+  mrss-bot:
+    container_name: mrss-bot-container
+    restart: on-failure:3
+    # The image can also be used
+    # image: synzen/monitorss
     build: .
-    networks:
-      - drss-network
+    depends_on:
+      - mrss-mongo
     environment:
-      - DRSS_BOT_TOKEN=drss_docker_token
-      - DRSS_DATABASE_URI=mongodb://drss-mongo:27017/rss
+      - DRSS_START=bot
+      - DRSS_BOT_TOKEN=
+      - DRSS_DATABASE_URI=mongodb://mrss-mongo:27017/rss
+  mrss-web:
+    container_name: mrss-web-container
+    # The image can also be used
+    # image: synzen/monitorss
+    build: .
+    restart: on-failure:3
+    depends_on:
+      - mrss-redis
+      - mrss-mongo
+    ports:
+      - "8081:8081"
+    environment:
+      - DRSS_START=web
+      - DRSSWEB_BOT_TOKEN=
+      - DRSSWEB_DATABASE_REDIS=redis://mrss-redis:6379
+      - DRSSWEB_DATABASE_URI=mongodb://mrss-mongo:27017/rss
+      - DRSSWEB_BOT_REDIRECTURI=
+      - DRSSWEB_BOT_CLIENTID=
+      - DRSSWEB_BOT_CLIENTSECRET=
 
 volumes:
   db-data:
-
-networks:
-  drss-network:
-    name: drss-network

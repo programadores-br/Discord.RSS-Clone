@@ -1,11 +1,14 @@
 const fs = require('fs')
-const DiscordRSS = require('discord.rss')
-const config = require('../settings/config.json')
+const path = require('path')
+const MonitoRSS = require('monitorss')
+const configPath = path.join(__dirname, '..', 'settings', 'config.bot.json')
+const configFile = fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath)) : {}
 
 // This will potentially throw
-DiscordRSS.validateConfig(config)
+MonitoRSS.config.set(configFile)
 
-const v6 = DiscordRSS.migrations.v6
+const config = MonitoRSS.config.get()
+const v6 = MonitoRSS.migrations.v6
 
 v6(config)
   .then((failures) => {
@@ -24,5 +27,3 @@ v6(config)
     console.error(err)
     process.exit(1)
   })
-
-

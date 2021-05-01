@@ -103,7 +103,8 @@ dist
 # TernJS port file
 .tern-port
 
-# Discord.RSS specific
-settings/config.json
-settings/schedules.json
-settings/api.js
+# Repo specific
+settings/*
+!settings/schedules.example.json
+!settings/config.bot.example.json
+!settings/config.web.example.json
